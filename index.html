@@ -6,6 +6,9 @@
     <title>Impatient button example usage</title>
 </head>
 <body>
-    <impatient-button></impatient-button>
+    <!-- Example usage of the impatient button. -->
+    <!-- Set up a throttling on the network tab or change the click function so it takes a long time to be executed so you can really see the impatient wait. -->
+    <impatient-button click="return fetch(new Request('http://127.0.0.1:5500/'))">CLICK ME!!</impatient-button>
+    <script src="impatient-button/impatientButton.js"></script>
 </body>
 </html>
