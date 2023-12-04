@@ -10,15 +10,32 @@ function ImpatientButton({text, handleClick}){
         }
 
         else{
-            impatientSemaphor = false;
+            blockSemaphor();
             
-            const result = handleClick(event);
+            const result = executeClick(event);
 
-            impatientSemaphor = true;
+            result.then(() => unblockSemaphor());
 
             return result;
         }
     }
+
+    const executeClick = (event) => {
+        const clickFunctionResult = handleClick(event);
+
+        //If it's a promise, then return it
+        if(clickFunctionResult.then){
+            return clickFunctionResult;
+        }
+        else{
+            //If not, create a promise so it can be waited
+            return new Promise(() => handleClick(event));
+        }
+    }
+
+    const blockSemaphor = () => { impatientSemaphor = false; }
+
+    const unblockSemaphor = () => { impatientSemaphor = true; }
 
     return (
         <>
